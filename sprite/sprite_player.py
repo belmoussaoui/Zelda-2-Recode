@@ -50,6 +50,9 @@ class SpritePlayer(SpriteCharacter):
         elif g.GAME_PLAYER.state == 'hurt':
             p = 6 if d == 1 else 1
             self.set_frame(39 * p + 1 * p, 40 * 9, 39, 40)
+        elif g.GAME_PLAYER.state == 'pick':
+            p = 3 if d == 1 else 4
+            self.set_frame(39 * p + 1 * p, 40 * 2, 39, 40)
         else:
             p = 4 if d == 1 else 3
             y = 0

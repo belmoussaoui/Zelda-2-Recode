@@ -12,6 +12,7 @@ from screen.screen_status import ScreenStatus
 from screen.screen_boss import ScreenBoss
 from sprite.sprite_player import SpritePlayer
 from sprite.spriteset_map import SpritesetMap
+from sprite.sprite_base import SpriteBase
 
 
 class SceneGame(SceneBase):
@@ -117,6 +118,9 @@ class SceneGame(SceneBase):
             self._bossScreen.setup(g.GAME_MAP.boss())
         if self._bossScreen.is_open():
             self._bossScreen.refresh()
+
+    def hide_screens(self):
+        self._statusScreen.hide()
 
     def update_scene(self):
         if g.GAME_PLAYER.is_dead:

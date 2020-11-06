@@ -2,7 +2,6 @@ import game_objects as g
 from game.game_elevator import GameElevator
 from core.pyxi import Audio
 from scene.scene_manager import SceneManager
-from scene.scene_end import SceneEnd
 
 
 def map_01():
@@ -243,5 +242,5 @@ def map_14():
     if g.GAME_PLAYER.right >= g.GAME_MAP.width():
         switch14 = False
         SceneManager.scene('start_fade_out')
-        SceneManager.goto(SceneEnd)
+        g.GAME_MAP.transfer('northpalace', 2, 7.5, 12)
 

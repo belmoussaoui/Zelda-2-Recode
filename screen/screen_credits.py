@@ -19,6 +19,7 @@ class ScreenCredits(ScreenBase):
         self.draw_text('Mister Mike', 0, 40+16, 256 - 32, 8)
         self.draw_text('GaryCXJK', 0, 40 + 32, 256 - 32, 8)
         self.draw_text('LoZ741', 0, 40 + 48, 256 - 32, 8)
+        self.draw_text('BruceJuice', 0, 40 + 48 + 16, 256 - 32, 8)
         self.hide_frame()
 
     def update(self):

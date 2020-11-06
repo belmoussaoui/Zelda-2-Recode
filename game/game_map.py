@@ -39,8 +39,8 @@ class GameMap:
     def starting_position(self):
         self.map_name = 'northpalace'
         self.map_id = 1
-        self.x = 13
-        self.y = 12
+        self.x = 23.5
+        self.y = 9
         self.load_script(self.map_name)
 
     def setup(self, tiled):
@@ -61,7 +61,7 @@ class GameMap:
     def setup_objects(self):
         self.enemies = []
         self.objects = []
-        objects = self.layers[-1]['objects']
+        objects = self.layers[-1].get('objects', [])
         for data in objects:
             x, y = data['x'], data['y']
             object_id = data['id']
@@ -273,7 +273,10 @@ class GameMap:
         self._script = import_module('script.' + script)
 
     def interpret_script(self, method='map_01'):
-        getattr(self._script, method)()
+        try:
+            getattr(self._script, method)()
+        except:
+            pass
 
     def get_hit_collisions(self, box):
         self._collide = []

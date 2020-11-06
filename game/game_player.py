@@ -147,6 +147,7 @@ class GameLink(GamePlayer):
         self.is_dead = False
         self.frame = 0  # ! see game character frame count
         self.shield_count = 0
+        self.can_input = True
 
     def clear(self):
         self.hp = 16 * 4
@@ -248,7 +249,8 @@ class GameLink(GamePlayer):
             'jump': self.state_jumping,
             'fall': self.state_falling,
             'crch': self.state_crouching,
-            'hurt': self.state_hurting
+            'hurt': self.state_hurting,
+            'pick': self.state_picking
         }
         switcher.get(self.state)()
         self.clamp_speed()
@@ -303,7 +305,13 @@ class GameLink(GamePlayer):
         self.jump_by_input()
         self.stab_by_input()
 
+    def state_picking(self):
+        pass
+
     def move_by_input(self):
+        if not self.can_input:
+            self.back_to_idle()
+            return
         d = self.get_input_direction()
         if d != 0:
             if self.is_on_ground:
@@ -314,6 +322,8 @@ class GameLink(GamePlayer):
             self.back_to_idle()
 
     def stab_by_input(self):
+        if not self.can_input:
+            return
         if not self.is_stabbing():
             if Input.is_key_triggered('x'):
                 self.stab()
@@ -323,6 +333,8 @@ class GameLink(GamePlayer):
         return Input.dirX()
 
     def jump_by_input(self):
+        if not self.can_input:
+            return
         if self.is_jump_triggered():
             self.crouch()
             self.ground_type = ''
@@ -332,6 +344,9 @@ class GameLink(GamePlayer):
             self.state = 'jump'
 
     def crouch_by_input(self):
+        if not self.can_input:
+            self.back_to_idle()
+            return
         if Input.is_key_pressed('down'):
             self.back_to_idle()
             self.crouch()

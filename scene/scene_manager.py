@@ -85,9 +85,10 @@ class SceneManager:
     @classmethod
     def scene(cls, message, *args):
         try:
-            eval('cls._scene.' + message + str(args))
+            params = '()' if len(args) == 0 else '(args[0])'
+            eval('cls._scene.' + message + params)
         except (SyntaxError, AttributeError):
-           pass
+            pass
 
     @staticmethod
     def terminate():
