@@ -152,16 +152,16 @@ class Audio:
             cls.sound.stop()
 
 
-class Stage(pygame.sprite.Group):
+class Stage(pygame.sprite.LayeredUpdates):
     def __init__(self):
-        pygame.sprite.Group.__init__(self)
+        pygame.sprite.LayeredUpdates.__init__(self)
 
     # because group define __nonzero__ with length of sprites !
     def __bool__(self):
         return True
 
     def update(self):
-        pygame.sprite.Group.update(self)
+        pygame.sprite.LayeredUpdates.update(self)
 
 
 class Sprite(pygame.sprite.Sprite):

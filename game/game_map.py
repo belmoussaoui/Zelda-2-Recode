@@ -37,10 +37,18 @@ class GameMap:
         self.can_scroll = True
 
     def starting_position(self):
+        #self.map_name = 'northpalace'
+        #self.map_id = 1
+        #self.x = 23.5
+        #self.y = 9
+        #self.load_script(self.map_name)
+        self.ending_position()
+
+    def ending_position(self):
         self.map_name = 'northpalace'
-        self.map_id = 1
-        self.x = 23.5
-        self.y = 9
+        self.map_id = 2
+        self.x = 7.5
+        self.y = 12
         self.load_script(self.map_name)
 
     def setup(self, tiled):

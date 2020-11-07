@@ -39,6 +39,7 @@ class SceneBase(Stage):
             self.fade_sprite = SpriteBase(*Display.screen_size_nes)
             self.fade_sprite.image.fill((0, 0, 0))
             self.fade_sprite.image.set_alpha(0)
+            self.fade_sprite.layer = 99
             self.add(self.fade_sprite)
 
     def update_fade(self):
