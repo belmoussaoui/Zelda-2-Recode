@@ -37,12 +37,12 @@ class GameMap:
         self.can_scroll = True
 
     def starting_position(self):
-        #self.map_name = 'northpalace'
-        #self.map_id = 1
-        #self.x = 23.5
-        #self.y = 9
-        #self.load_script(self.map_name)
-        self.ending_position()
+        self.map_name = 'northpalace'
+        self.map_id = 1
+        self.x = 23.5
+        self.y = 9
+        self.load_script(self.map_name)
+        #self.ending_position()
 
     def ending_position(self):
         self.map_name = 'northpalace'
@@ -120,9 +120,10 @@ class GameMap:
     def create_collision(self, x, y, tile):
         tw = self.tile_width()
         th = self.tile_height()
-        tile_type = tile['type']
-        rect = Rectangle(x * tw, y * th, tw, th)
-        self.tiles_rect.append({'rect': rect, 'type': tile_type})
+        tile_type = tile.get('type', False)
+        if tile_type:
+            rect = Rectangle(x * tw, y * th, tw, th)
+            self.tiles_rect.append({'rect': rect, 'type': tile_type})
 
     def tile_width(self):
         return self.tiled.get('tilewidth', 1)

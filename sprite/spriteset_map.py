@@ -63,6 +63,7 @@ class SpritesetMap(SpritesetBase):
     def update_tilemap(self):
         self._tilemap._lower_layer.x = -round(g.GAME_MAP.display_x)
         self._tilemap._upper_layer.x = -round(g.GAME_MAP.display_x)
+        self._tilemap.update()
         # self._tilemap.y = Game.map.displayY() * gGame.map.tile_height();
 
     def draw_collide(self):

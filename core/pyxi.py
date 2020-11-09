@@ -476,6 +476,7 @@ class Tilemap(pygame.sprite.LayeredUpdates):
         self._layers_count = 0
         self._tileset_data = {}
         self._tileset = None
+        self._animation_count = 0
 
     @property
     def width(self):
@@ -551,17 +552,35 @@ class Tilemap(pygame.sprite.LayeredUpdates):
         for z in range(self._layers_count):
             for y in range(self._map_height):
                 for x in range(self._map_width):
-                    self._draw_tile(x, y, z)
+                    tile_id = self._real_map_data(x, y, z)
+                    self._draw_tile(x, y, z, tile_id)
 
-    def _draw_tile(self, x, y, z):
-        tile_id = self._real_map_data(x, y, z)
+    def _draw_tile(self, x, y, z, tile_id):
         src_x = tile_id % (round(self._tileset_data['imagewidth'] / 16))
         src_y = math.floor(tile_id / round(self._tileset_data['imagewidth'] / 16))
         layer = self._lower_layer if z == 0 else self._upper_layer
         layer.image.blit(self._tileset.image, (x * 16, y * 16), (src_x * 16, src_y * 16, 16, 16))
 
     def update(self):
-        self._animationCount += 1
+        self._animation_count += 1
+        tiles = self._tileset_data.get('tiles', [])
+        for tile_data in tiles:
+            if tile_data.get('animation', False):
+                self.update_anim(tile_data)
+
+    def update_anim(self, tile_data):
+        for y in range(self._map_height):
+            for x in range(self._map_width):
+                tile_id = self._real_map_data(x, y)
+                print("ok")
+                if tile_id == tile_data["id"]:
+                    if self._animation_count % 20 == 0:
+                        id1 = tile_data["animation"][0]["tileid"]
+                        self._draw_tile(x, y, 0, id1)
+                    if self._animation_count % 20 == 10:
+                        id2 = tile_data["animation"][1]["tileid"]
+                        self._draw_tile(x, y, 0, id2)
+
 
     def _real_map_data(self, x, y, z=0):
         return self._data[(z * self._map_height + y) * self._map_width + x] - 1
