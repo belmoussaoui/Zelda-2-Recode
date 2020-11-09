@@ -2,6 +2,7 @@ import game_objects as g
 from game.game_elevator import GameElevator
 from scene.scene_manager import SceneManager
 from sprite.sprite_base import SpriteBase
+from scene.scene_title import SceneTitle
 
 
 def map_01():
@@ -80,6 +81,8 @@ def map_03():
     global start_anim, anim_count
     global sprite_zelda
     if not start_anim:
+        SceneManager._scene._messageScreen.open()
+        SceneManager._scene._messageScreen.draw_screen()
         start_anim = True
         g.GAME_PLAYER.can_input = False
         g.GAME_PLAYER.direction = 1
@@ -101,6 +104,9 @@ def map_03():
         elif anim_count == 300:
             sprite_zelda.x -= 4
             g.GAME_PLAYER.x += 4
+        elif anim_count == 120:
+            SceneManager.scene('start_fade_out')
+
 
         anim_count -= 1
 

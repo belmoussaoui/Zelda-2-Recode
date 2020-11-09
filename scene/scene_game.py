@@ -12,7 +12,7 @@ from screen.screen_status import ScreenStatus
 from screen.screen_boss import ScreenBoss
 from sprite.sprite_player import SpritePlayer
 from sprite.spriteset_map import SpritesetMap
-from sprite.sprite_base import SpriteBase
+from screen.screen_message import ScreenMessage
 
 
 class SceneGame(SceneBase):
@@ -42,6 +42,7 @@ class SceneGame(SceneBase):
         self.create_nextup_screen()
         self.create_select_screen()
         self.create_boss_screen()
+        self.create_message_screen()
 
     def create_status_screen(self):
         self._statusScreen = ScreenStatus()
@@ -65,6 +66,10 @@ class SceneGame(SceneBase):
     def create_boss_screen(self):
         self._bossScreen = ScreenBoss()
         self.add(self._bossScreen)
+
+    def create_message_screen(self):
+        self._messageScreen = ScreenMessage()
+        self.add(self._messageScreen)
 
     def create_spriteset(self):
         self._spriteset = SpritesetMap()

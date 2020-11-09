@@ -4,7 +4,7 @@ from sprite.sprite_character import SpriteCharacter
 
 class SpritePlayer(SpriteCharacter):
     def __init__(self):
-        self._layer = 1
+        self._layer = 0
         SpriteCharacter.__init__(self, 39, 40, g.GAME_PLAYER)
         self._frame_count = 0
 
