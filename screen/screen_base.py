@@ -52,5 +52,5 @@ class ScreenBase(Screen):
     def refresh(self):
         pass
 
-    def draw_text(self, text, x, y, width, height, alignX=True, alignY=True):
-        self._main_sprite.image.draw_text(text, x, y, width, height, alignX, alignY)
+    def draw_text(self, text, x, y, width, height, align_x=True, align_y=True):
+        self._main_sprite.image.draw_text(text, x, y, width, height, align_x, align_y)

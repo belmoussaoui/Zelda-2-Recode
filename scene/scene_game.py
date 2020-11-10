@@ -89,7 +89,8 @@ class SceneGame(SceneBase):
 
     def start_audio(self):
         if g.GAME_MAP.map_name == 'northpalace':
-            Audio.play_music_ground()
+            if g.GAME_MAP.map_id == 1:
+                Audio.play_music_ground()
         else:
             Audio.play_music_temple()
 

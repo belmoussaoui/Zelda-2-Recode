@@ -33,18 +33,17 @@ class SceneTitle(SceneBase):
 
     def update_state(self):
         if self.state == 'start':
-            self.processStart()
+            self.process_start()
         if self.state == 'credits':
-            self.processCredits()
+            self.process_credits()
 
-
-    def processStart(self):
+    def process_start(self):
         if Input.is_key_triggered('return'):
             self._title_sprite.image.fill((0, 0, 0))
             self._title_screen.open()
             self.state = 'select'
 
-    def processCredits(self):
+    def process_credits(self):
         if Input.is_key_triggered('escape'):
             self._title_screen.open()
             self._title_screen.select(2)

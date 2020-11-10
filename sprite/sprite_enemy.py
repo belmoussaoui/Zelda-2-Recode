@@ -273,7 +273,7 @@ class SpriteIronknuckle(SpriteEnemy):
         self.update_anim()
         self.update_weapon()
         self.update_direction()
-        self.update_collide()
+        #self.update_collide()
 
     def update_weapon(self):
         if self.character.is_stabbing():

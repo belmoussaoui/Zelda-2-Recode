@@ -66,12 +66,12 @@ class Audio:
     @classmethod
     def play_bgm(cls, filename, type=-1):
         pygame.mixer.music.load(cls.music_path + filename)
-       # pygame.mixer.music.play(type)
+        pygame.mixer.music.play(type)
 
     @classmethod
     def play_sound(cls, filename):
         cls.sound = pygame.mixer.Sound(cls.sound_path + filename)
-       # cls.sound.play()
+        cls.sound.play()
 
     @classmethod
     def play_music_title(cls):
@@ -95,6 +95,12 @@ class Audio:
         if cls.music != 'boss':
             cls.play_bgm('08_-_Legend_of_Zelda_2_-_NES_-_Boss.ogg')
             cls.music = 'boss'
+
+    @classmethod
+    def play_music_ending(cls):
+        if cls.music != 'ending':
+            cls.play_bgm('14_-_Legend_of_Zelda_2_-_NES_-_Princess_Zelda.ogg', 0)
+            cls.music = 'ending'
 
     @classmethod
     def play_sound_hurt(cls):
@@ -308,6 +314,10 @@ class Image(pygame.Surface):
                 hsla = (h, c.hsla[1], c.hsla[2] , c.hsla[3])
                 c.hsla = hsla
                 self.set_at((x, y), c)
+
+    # require to use pygame.RLEACCEL in version 2.0 of pygame on mac!
+    def set_alpha(self, alpha=0, **kwargs):
+        super().set_alpha(alpha, pygame.RLEACCEL)
 
 
 class Rectangle(pygame.Rect):
@@ -572,7 +582,6 @@ class Tilemap(pygame.sprite.LayeredUpdates):
         for y in range(self._map_height):
             for x in range(self._map_width):
                 tile_id = self._real_map_data(x, y)
-                print("ok")
                 if tile_id == tile_data["id"]:
                     if self._animation_count % 20 == 0:
                         id1 = tile_data["animation"][0]["tileid"]

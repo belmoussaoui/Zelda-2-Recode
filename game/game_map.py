@@ -42,7 +42,7 @@ class GameMap:
         self.x = 23.5
         self.y = 9
         self.load_script(self.map_name)
-        #self.ending_position()
+        self.ending_position()
 
     def ending_position(self):
         self.map_name = 'northpalace'

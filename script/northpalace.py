@@ -2,7 +2,7 @@ import game_objects as g
 from game.game_elevator import GameElevator
 from scene.scene_manager import SceneManager
 from sprite.sprite_base import SpriteBase
-from scene.scene_title import SceneTitle
+from core.pyxi import Audio
 
 
 def map_01():
@@ -21,10 +21,13 @@ sprite_zelda = SpriteBase(32, 32)
 sprite_triforce1 = SpriteBase(16, 16)
 sprite_triforce2 = SpriteBase(16, 16)
 sprite_triforce3 = SpriteBase(16, 16)
+
+
 def map_02():
     global triforce_count
     global sprite_triforce1, sprite_triforce2, sprite_triforce3
     if g.GAME_PLAYER.can_input:
+        Audio.play_music_ending()
         g.GAME_PLAYER.can_input = False
         g.GAME_PLAYER.state = "pick"
         g.GAME_PLAYER.direction = -1
@@ -75,8 +78,11 @@ def create_zelda():
     sprite_zelda.y = 240 / 2 - 8 + 16
     SceneManager.scene('add', sprite_zelda)
 
+
 start_anim = False
-anim_count = 900
+anim_count = 1020
+
+
 def map_03():
     global start_anim, anim_count
     global sprite_zelda
@@ -93,12 +99,11 @@ def map_03():
         sprite_zelda.y = 240 / 2 - 8 + 64
         sprite_zelda.image.flip()
         SceneManager.scene('add', sprite_zelda)
-        #create_zelda()
         SceneManager.scene('hide_screens')
         create_end_curtains()
         for curtain in curtains_up:
             curtain.set_frame(48, 240, 16, 16)
-    else:
+    elif anim_count <= 900:
         if anim_count > 360:
             update_curtains()
         elif anim_count == 300:
@@ -106,9 +111,7 @@ def map_03():
             g.GAME_PLAYER.x += 4
         elif anim_count == 120:
             SceneManager.scene('start_fade_out')
-
-
-        anim_count -= 1
+    anim_count -= 1
 
 curtains_up = []
 def create_curtains(offset=0):

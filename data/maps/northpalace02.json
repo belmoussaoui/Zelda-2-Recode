@@ -52,6 +52,30 @@
          "tileheight":16,
          "tiles":[
                 {
+                 "animation":[
+                        {
+                         "duration":100,
+                         "tileid":351
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":895
+                        }],
+                 "id":351
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":100,
+                         "tileid":356
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":894
+                        }],
+                 "id":356
+                }, 
+                {
                  "id":565,
                  "type":"ground"
                 }],
